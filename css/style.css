@@ -1,0 +1,11 @@
+html {
+  scroll-behavior: smooth;
+}
+.product-card {
+  transition: all 0.5s ease;
+}
+
+.product-card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}

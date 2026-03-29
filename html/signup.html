@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign up</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20width%3D%2240%22%20height%3D%2240%22%20aria-label%3D%22Shopme%22%3E%0A%20%20%3C!--%20Laptop%20screen%20--%3E%0A%20%20%3Crect%20x%3D%2212%22%20y%3D%2214%22%20width%3D%2240%22%20height%3D%2224%22%20rx%3D%223%22%20fill%3D%22%236D28D9%22%3E%3C%2Frect%3E%0A%20%20%3C!--%20Base%20--%3E%0A%20%20%3Crect%20x%3D%228%22%20y%3D%2238%22%20width%3D%2248%22%20height%3D%224%22%20rx%3D%221%22%20fill%3D%22%23FBBF24%22%3E%3C%2Frect%3E%0A%20%20%3C!--%20Checkmark%20--%3E%0A%20%20%3Cpath%20d%3D%22M24%2026l6%206%2012-12%22%20stroke%3D%22%23fff%22%20stroke-width%3D%224%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%3E%3C%2Fpath%3E%0A%3C%2Fsvg%3E%0A"
+    />
+  </head>
+  <body class="">
+    <div class="navbar bg-base-100 shadow-md bg-white" id="header">
+      <!--  -->
+
+      <!--  -->
+      <div class="flex-1">
+        <a
+          href="index.html"
+          class="btn btn-ghost text-xl absolute top-3.5 font-extralight h-12"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 64 64"
+            width="70"
+            height="70"
+            aria-label="Shopme"
+            class="relative inline-block mr-2 top-1"
+          >
+            <!-- Laptop screen -->
+            <rect x="12" y="14" width="40" height="24" rx="3" fill="#6D28D9" />
+            <!-- Base -->
+            <rect x="8" y="38" width="48" height="4" rx="1" fill="#FBBF24" />
+            <!-- Checkmark -->
+            <path
+              d="M24 26l6 6 12-12"
+              stroke="#fff"
+              stroke-width="4"
+              fill="none"
+              stroke-linecap="round"
+            />
+          </svg>
+
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/assets/favicon-32.png"
+          />Shopme
+        </a>
+      </div>
+    </div>
+    <section class="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
+      <!-- ===== CỘT ẢNH (TRÁI) ===== -->
+      <div class="hidden lg:flex items-center justify-center bg-gray-50">
+        <img
+          src="https://media.gettyimages.com/id/1302412340/vector/avatars-young-people-squares.jpg?s=612x612&w=0&k=20&c=7QdpbnUswLqzHvBEeTwsKDwjVNzUI_3Z93W6HcQ95Z0="
+          class="w-4/5 max-w-md"
+        />
+      </div>
+
+      <!-- ===== CỘT FORM (PHẢI) ===== -->
+      <form
+        id="signup-form"
+        class="w-full px-6 py-20 mx-auto md:w-3/5 lg:w-4/5 xl:w-3/5"
+      >
+        <h1 class="mb-6 text-2xl font-extrabold text-gray-900 md:text-3xl">
+          Sign up today
+        </h1>
+
+        <!-- EMAIL -->
+        <label class="block mb-4">
+          <span class="block mb-1 text-sm font-medium text-gray-700">
+            Your Email
+          </span>
+          <input
+            id="email"
+            type="email"
+            placeholder="Ex. abcd@gmail.com"
+            class="input input-bordered w-full rounded-lg"
+            required
+          />
+        </label>
+
+        <!-- PASSWORD -->
+        <label class="block mb-4">
+          <span class="block mb-1 text-sm font-medium text-gray-700">
+            Password
+          </span>
+          <input
+            id="password"
+            type="password"
+            placeholder="••••••••"
+            class="input input-bordered w-full rounded-lg"
+            required
+          />
+        </label>
+
+        <!-- RE-PASSWORD -->
+        <label class="block mb-6">
+          <span class="block mb-1 text-sm font-medium text-gray-700">
+            Re-enter Password
+          </span>
+          <input
+            id="rePassword"
+            type="password"
+            placeholder="••••••••"
+            class="input input-bordered w-full rounded-lg"
+            required
+          />
+        </label>
+
+        <!-- SUBMIT -->
+        <button type="submit" class="w-full btn btn-primary btn-lg">
+          Register
+        </button>
+
+        <!-- LINK SIGN IN -->
+        <p class="mt-6 text-sm text-center text-gray-600">
+          Already have an account?
+          <a href="signin.html" class="text-purple-700 hover:underline">
+            Sign in
+          </a>
+        </p>
+      </form>
+    </section>
+    <!-- ===== FOOTER ===== -->
+    <script src="../js/signup.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </body>
+</html>
