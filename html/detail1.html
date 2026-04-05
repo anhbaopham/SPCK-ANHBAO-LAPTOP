@@ -71,15 +71,21 @@
         <div class="flex gap-10">
           <!-- CỘT TRÁI: HÌNH -->
           <div class="w-1/2 flex justify-center">
-            <img class="product-image max-w-sm object-contain" />
+            <img id="product-image" class="max-w-sm object-contain" />
           </div>
 
           <!-- CỘT PHẢI: THÔNG TIN -->
           <div class="w-1/2 space-y-4">
-            <h2 class="product-title text-2xl"></h2>
-            <p class="product-desc"></p>
-            <h2 class="product-price text-red-600 text-2xl font-bold"></h2>
-            <h3 class="product-stock text-green-600 font-medium"></h3>
+            <h2 id="product-title" class="text-2xl"></h2>
+            <p id="product-desc" class="product-desc"></p>
+            <h2
+              id="product-price"
+              class="product-price text-red-600 text-2xl font-bold"
+            ></h2>
+            <h3
+              id="product-stock"
+              class="product-stock text-green-600 font-medium"
+            ></h3>
 
             <div class="flex gap-3 mt-6">
               <button id="btnBuy" class="btn btn-primary">Mua ngay</button>
@@ -153,8 +159,29 @@
           </a>
         </div>
       </nav>
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-      <script src="../js/detail.js"></script>
+      <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </footer>
+    <!-- link CDN của firebase -->
+    <!-- chữ defer có nghĩa là phải tải xong script ở trên thì mới tiếp tục xuống dưới tuần tự -->
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"
+    ></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Cấu hình nhận diện chủ sở hữu config -->
+    <script defer src="../firebase.config.js"></script>
+    <script defer src="../js/product-data.js"></script>
+    <script defer src="../js/detail.js"></script>
+
+    <script defer src="../js/main.js"></script>
   </body>
 </html>

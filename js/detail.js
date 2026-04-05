@@ -1,42 +1,29 @@
+// js/detail.js
 const params = new URLSearchParams(window.location.search);
-const id = Number(params.get("id"));
-const buy = document.getElementById("btnBuy");
+const id = params.get("id");
+const productTitle = document.getElementById("product-title");
+const productDesc = document.getElementById("product-desc");
+const productImage = document.getElementById("product-image");
+const productPrice = document.getElementById("product-price");
+const productStock = document.getElementById("product-stock");
+const btnBuy = document.getElementById("btnBuy");
+async function renderDetail() {
+  const product = await getProductByIdFromFirebase(id);
 
-const products = JSON.parse(localStorage.getItem("products")) || [];
-const product = products.find((p) => p.id === id);
-
-if (!product) {
-  Swal.fire({
-    icon: "error",
-    title: "Không tìm thấy sản phẩm",
-    willClose: () => (location.href = "index.html"),
-  });
-} else {
-  document.querySelector(".product-title").innerText = product.title;
-  document.querySelector(".product-desc").innerText = product.description;
-  document.querySelector(".product-image").src = product.thumbnail;
-  document.querySelector(".product-price").innerText =
-    product.price.toLocaleString() + " đ";
-  document.querySelector(".product-stock").innerText =
-    "Còn sẵn: " + product.stock.toLocaleString();
+  if (!product) {
+    return Swal.fire("Lỗi", "Sản phẩm không tồn tại", "error").then(
+      () => (location.href = "index.html"),
+    );
+  }
+  productTitle.innerText = product.title;
+  productDesc.innerText = product.description;
+  productImage.src = product.thumbnail;
+  productPrice.innerText = product.price.toLocaleString() + " đ";
+  productStock.innerText = "Kho: " + product.stock;
+  if (product.stock < 0 || product.stock === 0) {
+    btnBuy.disabled = true;
+    btnBuy.innerText = "Hết hàng";
+  }
 }
 
-buy.addEventListener("click", () => {
-  Swal.fire({
-    title: "Bạn muốn mua sản phẩm này?",
-    text: "Chắc chắn chứ?",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Mua ngay",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      Swal.fire({
-        title: "Đã mua!",
-        text: "Sản phẩm đang trong quá trình xử lý.",
-        icon: "success",
-      });
-    }
-  });
-});
+renderDetail();

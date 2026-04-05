@@ -61,9 +61,7 @@
           <ul
             class="menu dropdown-content bg-gray-800/50 rounded-box z-1 w-52 p-2 shadow-sm"
           >
-            <li id="greeting" class="p-2 hover:bg-gray-800">
-              <h1>Xin chào: User</h1>
-            </li>
+            <li id="greeting" class="p-2 hover:bg-gray-800"></li>
             <li id="btn-logout" class="p-2 hover:bg-gray-800">Đăng xuất</li>
           </ul>
         </details>
@@ -99,13 +97,13 @@
         <a
           id="btnSignin"
           href="signin.html"
-          class="btn btn-outline rounded-full shadow-md product-card hover:shadow-lg hover:scale-105 transition-transform duration-200"
+          class="hidden btn btn-outline rounded-full shadow-md product-card hover:shadow-lg hover:scale-105 transition-transform duration-200"
           >Sign in</a
         >
         <a
           id="btnSignup"
           href="signup.html"
-          class="btn btn-primary rounded-full shadow-md product-card hover:shadow-lg hover:scale-105 transition-transform duration-200"
+          class="hidden btn btn-primary rounded-full shadow-md product-card hover:shadow-lg hover:scale-105 transition-transform duration-200"
           >Sign up</a
         >
       </div>
@@ -253,10 +251,34 @@
         </div>
       </nav>
     </footer>
-    <script src="../js/check-login.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- link CDN của firebase -->
+    <!-- chữ defer có nghĩa là phải tải xong script ở trên thì mới tiếp tục xuống dưới tuần tự -->
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"
+    ></script>
 
-    <script src="../js/products.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Cấu hình nhận diện chủ sở hữu config -->
+    <script defer src="../firebase.config.js"></script>
+
+    <script defer src="../js/main.js"></script>
+    <script defer src="../js/auth.js"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"
+    ></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script defer src="../js/product-data.js"></script>
+    <script defer src="../js/products.js"></script>
+    <script src="../js/generate-data.js"></script>
   </body>
 </html>
