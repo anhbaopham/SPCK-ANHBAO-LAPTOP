@@ -30,14 +30,6 @@
     />
   </head>
   <body class="relative font-sans">
-    <a href="premium.html"
-      ><button
-        title="Nâng cấp ngay!"
-        class="block btn btn-warning scale-130 hover:scale-150 transition-transform duration-300 fixed bottom-5 left-9 z-50"
-      >
-        Premium
-      </button></a
-    >
     <!-- Chevron-up -->
     <div class="inset-0 fixed flex items-end justify-end">
       <div class="p-5">
@@ -138,17 +130,10 @@
         <legend class="fieldset-legend">Sản phẩm</legend>
 
         <label class="label">Tên sản phẩm</label>
-        <input
-          id="editTitle"
-          type="text"
-          class="input"
-          placeholder="Tên laptop"
-          required
-        />
+        <input id="editTitle" class="input" placeholder="Tên laptop" required />
         <label class="label">Hình ảnh sản phẩm</label>
         <input
           id="editImg"
-          type="text"
           class="input"
           placeholder="Hình ảnh laptop"
           required
@@ -157,7 +142,6 @@
         <label class="label">Mô tả</label>
         <input
           id="editDesc"
-          type="text"
           class="input"
           placeholder="Mô tả sản phẩm"
           required
@@ -165,7 +149,6 @@
         <label class="label">Kho</label>
         <input
           id="editStock"
-          type="text"
           class="input"
           placeholder="Số lượng sản phẩm"
           required
@@ -174,16 +157,19 @@
         <label class="label">Giá</label>
         <input
           id="editPrice"
-          type="text"
           class="input"
           placeholder="Giá sản phẩm"
           required
         />
-        <a id="btnSaveChanges" class="btn relative">Lưu</a>
+        <a id="btnSaveChanges" class="btn btn-warning relative">Lưu</a>
       </fieldset>
     </div>
     <hr />
 
+    <div
+      id="product-list"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4"
+    ></div>
     <footer
       class="footer sm:footer-horizontal bg-base-300 text-base-content mt-10 p-10 bg-black text-white"
     >
@@ -261,18 +247,12 @@
       src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"
     ></script>
 
-    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- Cấu hình nhận diện chủ sở hữu config -->
     <script defer src="../firebase.config.js"></script>
 
-    <script defer src="../js/main.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script defer src="../js/product-data.js"></script>
 
-    <script
-      defer
-      src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"
-    ></script>
-    <script defer src="../js/auth.js"></script>
     <script defer src="../js/Edit.js"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>
 </html>

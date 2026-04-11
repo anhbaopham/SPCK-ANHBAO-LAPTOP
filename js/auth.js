@@ -3,16 +3,20 @@ const auth = firebase.auth();
 var provider = new firebase.auth.GoogleAuthProvider();
 // 1. Kiểm tra trạng thái đăng nhập & Cập nhật UI
 
-const btnSignin = document.getElementById("btnSignin");
-const btnSignup = document.getElementById("btnSignup");
-const btnLogout = document.getElementById("btn-logout");
+var btnSignin = document.getElementById("btnSignin");
+var btnSignup = document.getElementById("btnSignup");
+var btnLogout = document.getElementById("btn-logout");
 const greeting = document.getElementById("greeting");
 const loginForm = document.getElementById("login-form");
 const checkUser = document.getElementById("check-user");
 const profile = document.getElementById("profile");
 const googleLogin = document.getElementById("googleLogin");
 const signupForm = document.getElementById("signup-form");
-
+var btnEdit = document.getElementById("btnEdit");
+var btnCreate = document.getElementById("btnCreate");
+const googleRegister = document.getElementById("googleRegister");
+const admingreeting = document.getElementById("admin-greeting");
+const textgreeting = document.getElementById("text-greeting");
 auth.onAuthStateChanged((user) => {
   if (user) {
     // Trạng thái: ĐÃ ĐĂNG NHẬP
@@ -26,6 +30,26 @@ auth.onAuthStateChanged((user) => {
     }
     if (loginForm) loginForm.classList.add("hidden");
     if (checkUser) checkUser.classList.remove("hidden");
+
+    // 2. ĐI KIỂM TRA QUYỀN ADMIN TỪ FIRESTORE
+    db.collection("users")
+      .doc(user.uid)
+      .get()
+      .then((doc) => {
+        if (doc.exists && doc.data().role === "admin") {
+          // Hiện các nút dành riêng cho Admin
+          if (btnEdit) btnEdit.classList.remove("hidden");
+          if (btnCreate) btnCreate.classList.remove("hidden");
+          if (admingreeting) {
+            admingreeting.classList.remove("hidden");
+            textgreeting.innerText = `Xin chào Admin ${user.displayName || user.email}`;
+          }
+        } else {
+          // Ẩn các nút Admin nếu người này không phải admin
+          if (btnEdit) btnEdit.classList.add("hidden");
+          if (btnCreate) btnCreate.classList.add("hidden");
+        }
+      });
   } else {
     // Trạng thái: ĐĂNG XUẤT
     if (btnSignin) btnSignin.classList.remove("hidden");
@@ -41,8 +65,38 @@ auth.onAuthStateChanged((user) => {
 // 2. Xử lý Đăng ký (nếu đang ở trang signup)
 
 if (signupForm) {
+  googleRegister.addEventListener("click", (o) => {
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        /** @type {firebase.auth.OAuthCredential} */
+        var credential = result.credential;
+
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        // IdP data available in result.additionalUserInfo.profile.
+        // ...
+        Swal.fire({
+          title: "Chào mừng!",
+          text: `Đăng nhập thành công, ${user.displayName || user.email}!`,
+          icon: "success",
+        }).then(() => (location.href = "index.html"));
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
+      });
+  });
   signupForm.addEventListener("submit", (e) => {
-    e.preventDefault();
     const { email, password } = e.target;
     auth
       .createUserWithEmailAndPassword(email.value, password.value)
@@ -73,6 +127,11 @@ if (loginForm && !signupForm && googleLogin) {
         var user = result.user;
         // IdP data available in result.additionalUserInfo.profile.
         // ...
+        Swal.fire({
+          title: "Chào mừng!",
+          text: `Đăng nhập thành công, ${user.displayName || user.email}!`,
+          icon: "success",
+        }).then(() => (location.href = "index.html"));
       })
       .catch((error) => {
         // Handle Errors here.
@@ -83,6 +142,7 @@ if (loginForm && !signupForm && googleLogin) {
         // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
         // ...
+        alert("Lỗi đăng nhập Google: " + errorMessage);
       });
   });
   loginForm.addEventListener("submit", (e) => {

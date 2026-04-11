@@ -93,6 +93,18 @@
         </a>
       </div>
       <!--  -->
+      <div
+        id="admin-greeting"
+        class="hidden flex-[8] justify-center items-center flex"
+      >
+        <div
+          class="flex items-center gap-4 bg-gray-100 px-6 py-2 rounded-full border border-gray-200"
+        >
+          <i class="fa-duotone fa-solid fa-screwdriver-wrench text-black"></i>
+          <span id="text-greeting" class="text-sm font-medium"></span>
+        </div>
+      </div>
+      <!--  -->
       <div class="absolute right-3">
         <a
           id="btnSignin"
@@ -160,7 +172,7 @@
     </div>
     <!-- Thanh tìm kiếm-->
     <div class="flex justify-center mt-8 mb-6 px-4">
-      <div class="flex items-center gap-2 w-full max-w-2xl">
+      <div class="flex items-center gap-3 w-full max-w-2xl">
         <!-- Input -->
         <input
           id="search-bar"
@@ -170,13 +182,19 @@
         />
 
         <!-- Create -->
-        <a href="./create.html" class="btn btn-primary">
+        <a id="btnCreate" href="./create.html" class="hidden btn btn-primary">
           <i class="fa-solid fa-circle-plus"></i>
         </a>
 
         <!-- Edit -->
-        <button id="btnEdit" class="btn btn-outline">
+        <button id="btnEdit" class="hidden btn btn-outline">
           <i class="fa-regular fa-pen-to-square"></i>
+        </button>
+        <!-- bag-shopping -->
+        <button
+          class="h-10 w-10 flex justify-center items-center rounded-full bg-gray-200 hover:bg-gray-300 transition-colors duration-200"
+        >
+          <i class="fa-duotone fa-solid fa-bag-shopping"></i>
         </button>
       </div>
     </div>
@@ -279,6 +297,5 @@
     <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script defer src="../js/product-data.js"></script>
     <script defer src="../js/products.js"></script>
-    <script src="../js/generate-data.js"></script>
   </body>
 </html>

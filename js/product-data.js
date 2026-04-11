@@ -2,38 +2,32 @@
 const db = firebase.firestore();
 const collectionName = "products";
 
-// 1. Lấy toàn bộ danh sách sản phẩm
+// Lấy tất cả sản phẩm
 async function getProductsFromFirebase() {
   try {
     const snapshot = await db
       .collection(collectionName)
       .orderBy("createdAt", "desc")
       .get();
-    return snapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
+    return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   } catch (error) {
-    console.error("Lỗi khi lấy dữ liệu: ", error);
+    console.error("Lỗi lấy danh sách:", error);
     return [];
   }
 }
 
-// 2. Lấy chi tiết 1 sản phẩm theo ID
+// Lấy 1 sản phẩm theo ID
 async function getProductByIdFromFirebase(docId) {
   try {
     const doc = await db.collection(collectionName).doc(docId).get();
-    if (doc.exists) {
-      return { id: doc.id, ...doc.data() };
-    }
-    return null;
+    return doc.exists ? { id: doc.id, ...doc.data() } : null;
   } catch (error) {
-    console.error("Lỗi khi lấy chi tiết: ", error);
+    console.error("Lỗi lấy chi tiết:", error);
     return null;
   }
 }
 
-// 3. Thêm sản phẩm mới
+// Thêm sản phẩm
 async function addProductToFirebase(productData) {
   try {
     await db.collection(collectionName).add({
@@ -42,34 +36,33 @@ async function addProductToFirebase(productData) {
     });
     return true;
   } catch (error) {
-    console.error("Lỗi khi thêm: ", error);
+    console.error("Lỗi thêm sản phẩm:", error);
     return false;
   }
 }
 
-// 4. Cập nhật sản phẩm
+// Cập nhật sản phẩm
 async function updateProductInFirebase(docId, updatedData) {
   try {
     await db.collection(collectionName).doc(docId).update(updatedData);
     return true;
   } catch (error) {
-    console.error("Lỗi khi sửa: ", error);
+    console.error("Lỗi cập nhật:", error);
     return false;
   }
 }
 
-// 5. Xoá sản phẩm
+// Xóa sản phẩm
 async function deleteProductFromFirebase(docId) {
   try {
     await db.collection(collectionName).doc(docId).delete();
     return true;
   } catch (error) {
-    console.error("Lỗi khi xoá: ", error);
+    console.error("Lỗi xóa:", error);
     return false;
   }
 }
-
-// Thêm hàm này vào product-data.js nếu chưa có
+// Thêm vào js/product-data.js
 async function getProductByIdFromFirebase(docId) {
   try {
     const doc = await db.collection("products").doc(docId).get();
@@ -78,7 +71,7 @@ async function getProductByIdFromFirebase(docId) {
     }
     return null;
   } catch (error) {
-    console.error("Lỗi khi lấy chi tiết:", error);
+    console.error("Lỗi lấy chi tiết sản phẩm:", error);
     return null;
   }
 }

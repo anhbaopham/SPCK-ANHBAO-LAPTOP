@@ -1,31 +1,55 @@
-// js/create.js
-const form = document.getElementById("create-form"); // Giả sử form có id này
 const btnCreate = document.getElementById("btnCreate");
-const nameInput = document.getElementById("nameLaptop").value.trim();
-const priceInput = document.getElementById("priceLaptop").value.trim();
-const descInput = document.getElementById("descriptionLaptop").value.trim();
-const imageInput = document.getElementById("imageLaptop").value.trim();
-const stockInput = document.getElementById("stockLaptop").value.trim();
 
-if (!nameInput || !priceInput || !imageInput) {
-  return alert("Vui lòng nhập các thông tin bắt buộc!");
-}
+if (btnCreate) {
+  btnCreate.addEventListener("click", async (e) => {
+    e.preventDefault();
 
-const newProduct = {
-  title: nameInput,
-  price: Number(priceInput),
-  description: descInput,
-  thumbnail: imageInput,
-  stock: Number(stockInput),
-};
+    // Lấy dữ liệu từ các ID có trong create.html
+    const name = document.getElementById("nameLaptop").value.trim();
+    const price = document.getElementById("priceLaptop").value.trim();
+    const desc = document.getElementById("descriptionLaptop").value.trim();
+    const image = document.getElementById("imageLaptop").value.trim();
+    const stock = document.getElementById("stockLaptop").value.trim();
 
-Swal.fire({ title: "Đang lưu...", didOpen: () => Swal.showLoading() });
+    // Kiểm tra thông tin bắt buộc
+    if (!name || !price || !image) {
+      return Swal.fire(
+        "Lỗi",
+        "Vui lòng nhập đầy đủ tên, giá và ảnh sản phẩm!",
+        "error",
+      );
+    }
 
-const success = await addProductToFirebase(newProduct);
-if (success) {
-  Swal.fire({
-    title: "Thành công",
-    text: "Sản phẩm đã được lưu lên Firebase",
-    icon: "success",
-  }).then(() => (location.href = "index.html"));
+    const newProduct = {
+      title: name,
+      price: Number(price),
+      description: desc || "",
+      thumbnail: image,
+      stock: Number(stock) || 0,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(), // Thời gian tạo tự động
+    };
+
+    // Hiển thị thông báo đang xử lý
+    Swal.fire({
+      title: "Đang lưu sản phẩm...",
+      didOpen: () => Swal.showLoading(),
+    });
+
+    try {
+      // Sử dụng hàm addProductToFirebase từ product-data.js (nếu bạn đã nhúng file đó)
+      // Hoặc gọi trực tiếp như bên dưới để đảm bảo chạy ngay:
+      await firebase.firestore().collection("products").add(newProduct);
+
+      Swal.fire({
+        title: "Thành công!",
+        text: "Sản phẩm đã được thêm.",
+        icon: "success",
+      }).then(() => {
+        location.href = "index.html"; // Chuyển về trang chủ
+      });
+    } catch (error) {
+      console.error("Lỗi khi thêm sản phẩm:", error);
+      Swal.fire("Lỗi", "Không thể thêm sản phẩm: " + error.message, "error");
+    }
+  });
 }

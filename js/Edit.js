@@ -1,9 +1,11 @@
 // js/Edit.js
 const params = new URLSearchParams(window.location.search);
-const id = params.get("id"); // ID từ Firebase là chuỗi (string)
+const id = params.get("id");
 
 async function loadDataToEdit() {
   if (!id) return;
+
+  // Gọi hàm từ product-data.js
   const product = await getProductByIdFromFirebase(id);
 
   if (!product) {
@@ -12,13 +14,15 @@ async function loadDataToEdit() {
     );
   }
 
-  document.getElementById("editTitle").value = product.title;
-  document.getElementById("editPrice").value = product.price;
-  document.getElementById("editDesc").value = product.description;
-  document.getElementById("editImg").value = product.thumbnail;
-  document.getElementById("editStock").value = product.stock;
+  // Đổ dữ liệu vào đúng ID trong file edit.html của bạn
+  document.getElementById("editTitle").value = product.title || "";
+  document.getElementById("editPrice").value = product.price || 0;
+  document.getElementById("editDesc").value = product.description || "";
+  document.getElementById("editImg").value = product.thumbnail || "";
+  document.getElementById("editStock").value = product.stock || 0;
 }
 
+// Xử lý nút lưu thay đổi
 document
   .getElementById("btnSaveChanges")
   ?.addEventListener("click", async (e) => {
@@ -40,4 +44,5 @@ document
     }
   });
 
+// Chạy hàm ngay khi load file
 loadDataToEdit();
