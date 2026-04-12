@@ -1,45 +1,42 @@
 const btnCreate = document.getElementById("btnCreateSubmit");
 const bgCreate = document.getElementById("bgcreate");
 const stockInput = document.getElementById("stockLaptop");
-const name = document.getElementById("nameLaptop").value.trim();
-const price = document.getElementById("priceLaptop").value.trim();
-const desc = document.getElementById("descriptionLaptop").value.trim();
-const image = document.getElementById("imageLaptop").value.trim();
 
 if (btnCreate) {
-  stockInput.addEventListener("input", async (r) => {
-    if (r.target.value < 0) {
-      Swal.fire({
-        title: "Số lượng không hợp lệ",
-        icon: "warning",
+  // stockInput.addEventListener("input", (r) => {
+  //   if (r.target.value < 0) {
+  //     Swal.fire({
+  //       title: "Số lượng không hợp lệ",
+  //       icon: "warning",
 
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-        backdrop: false,
-        toast: true,
-        width: "auto", // Để nó tự co giãn theo chữ cho gọn
-        padding: "0.8rem",
+  //       position: "top-end",
+  //       showConfirmButton: false,
+  //       timer: 2000,
+  //       timerProgressBar: true,
+  //       backdrop: false,
+  //       toast: true,
+  //       width: "auto", // Để nó tự co giãn theo chữ cho gọn
+  //       padding: "0.8rem",
 
-        // Custom giao diện bằng CSS class
-        customClass: {
-          popup: "my-pro-toast",
-          title: "my-pro-title",
-          timerProgressBar: "my-pro-progress",
-        },
+  //       // Custom giao diện bằng CSS class
+  //       customClass: {
+  //         popup: "my-pro-toast",
+  //         title: "my-pro-title",
+  //         timerProgressBar: "my-pro-progress",
+  //       },
 
-        // Hiệu ứng mượt mà
-        showClass: {
-          popup: "animate__animated animate__backInRight",
-        },
-        hideClass: {
-          popup: "animate__animated animate__fadeOutRight",
-        },
-      });
-      return (r.target.value = 0);
-    }
-  });
+  //       // Hiệu ứng mượt mà
+  //       showClass: {
+  //         popup: "animate__animated animate__backInRight",
+  //       },
+  //       hideClass: {
+  //         popup: "animate__animated animate__fadeOutRight",
+  //       },
+  //     });
+  //     return (r.target.value = 0);
+  //   }
+  // });
+
   // Hiển thị ảnh preview khi người dùng nhập URL
   const imgInput = document.getElementById("imageLaptop");
   imgInput.addEventListener("input", (o) => {
@@ -50,11 +47,16 @@ if (btnCreate) {
       bgCreate.src = ""; // Xóa ảnh nếu input trống
     }
   });
+
   btnCreate.addEventListener("click", async (e) => {
     e.preventDefault();
 
     // Lấy dữ liệu từ các ID có trong create.html
-
+    const name = document.getElementById("nameLaptop").value.trim();
+    const price = document.getElementById("priceLaptop").value.trim();
+    const desc = document.getElementById("descriptionLaptop").value.trim();
+    const image = document.getElementById("imageLaptop").value.trim();
+    const stock = document.getElementById("stockLaptop").value.trim();
     // Kiểm tra thông tin bắt buộc
     if (!name || !price || !image) {
       return Swal.fire(

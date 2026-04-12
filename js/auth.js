@@ -3,7 +3,8 @@ const auth = firebase.auth();
 var provider = new firebase.auth.GoogleAuthProvider();
 // Thay bằng email admin thật của bạn
 // 1. Kiểm tra trạng thái đăng nhập & Cập nhật UI
-
+const editPage = document.getElementById("editHtml");
+const createPage = document.getElementById("createHtml");
 var btnSignin = document.getElementById("btnSignin");
 var btnSignup = document.getElementById("btnSignup");
 var btnLogout = document.getElementById("btn-logout");
@@ -45,15 +46,24 @@ auth.onAuthStateChanged((user) => {
             admingreeting.classList.remove("hidden");
             textgreeting.innerText = `Xin chào Admin ${user.displayName || user.email}`;
           }
+          if (createPage) createPage.classList.remove("hidden");
+          if (editPage) editPage.classList.remove("hidden");
         } else {
           // Ẩn các nút Admin nếu người này không phải admin
           if (btnEdit) btnEdit.classList.add("hidden");
           if (btnCreateI) btnCreateI.classList.add("hidden");
           if (admingreeting) admingreeting.classList.add("hidden");
+          if (createPage)
+            (alert("Bạn không có quyền truy cập trang này!"),
+              (location.href = "signin.html"));
+          if (editPage)
+            (alert("Bạn không có quyền truy cập trang này!"),
+              (location.href = "signin.html"));
         }
       });
   } else {
     // Trạng thái: ĐĂNG XUẤT
+
     if (btnSignin) btnSignin.classList.remove("hidden");
     if (btnSignup) btnSignup.classList.remove("hidden");
     if (btnLogout) btnLogout.classList.add("hidden");
@@ -61,6 +71,12 @@ auth.onAuthStateChanged((user) => {
     if (greeting) greeting.classList.add("hidden");
     if (loginForm) loginForm.classList.remove("hidden");
     if (checkUser) checkUser.classList.add("hidden");
+    if (createPage)
+      (alert("Vui lòng đăng nhập để truy cập trang này!"),
+        (location.href = "signin.html"));
+    if (editPage)
+      (alert("Vui lòng đăng nhập để truy cập trang này!"),
+        (location.href = "signin.html"));
   }
 });
 
