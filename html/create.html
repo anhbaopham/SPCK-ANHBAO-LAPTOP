@@ -123,7 +123,8 @@
         >
       </div>
     </div>
-    <div class="">
+    <div class="grid grid-cols-2 gap-2 container mx-35 mt-10">
+      <img src="" alt="" class="border rounded-xl" id="bgcreate" />
       <fieldset
         class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4 mx-auto"
       >
@@ -157,7 +158,7 @@
         <label class="label">Kho</label>
         <input
           id="stockLaptop"
-          type="text"
+          type="number"
           class="input"
           placeholder="Số lượng sản phẩm"
           required
@@ -166,12 +167,14 @@
         <label class="label">Giá</label>
         <input
           id="priceLaptop"
-          type="text"
+          type="number"
           class="input"
           placeholder="Giá sản phẩm"
           required
         />
-        <a id="btnCreate" class="btn relative" href="">Tạo sản phẩm</a>
+        <a id="btnCreateSubmit" class="btn relative btn-primary" href=""
+          >Tạo sản phẩm</a
+        >
       </fieldset>
     </div>
     <hr />
@@ -253,13 +256,13 @@
       src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"
     ></script>
 
-    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Cấu hình nhận diện chủ sở hữu config -->
     <script defer src="../firebase.config.js"></script>
 
     <script defer src="../js/main.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script defer src="../js/create.js"></script>
+
     <script
       defer
       src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"

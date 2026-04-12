@@ -13,6 +13,8 @@ function renderProducts(list) {
     <div class="card bg-base-100 shadow hover:shadow-lg product-card">
       <figure class="p-4 ${!isEditMode ? "cursor-pointer" : ""}" 
         onclick="${!isEditMode ? `location.href='detail1.html?id=${p.id}'` : ""}">
+        
+        ${p.stock === 0 ? '<div class="flex-[8] animate-pulse  bg-red-600 rounded-sm text-white text-xs font-bold p-0.5 absolute pl-50 pr-50  ">Hết hàng</div>' : ""}
         <img src="${p.thumbnail}" class="h-40 object-contain w-full" alt="${p.title}" />
       </figure>
       <div class="card-body">

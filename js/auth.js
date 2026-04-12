@@ -1,6 +1,7 @@
 // Cấu hình chung cho Auth
 const auth = firebase.auth();
 var provider = new firebase.auth.GoogleAuthProvider();
+// Thay bằng email admin thật của bạn
 // 1. Kiểm tra trạng thái đăng nhập & Cập nhật UI
 
 var btnSignin = document.getElementById("btnSignin");
@@ -13,7 +14,7 @@ const profile = document.getElementById("profile");
 const googleLogin = document.getElementById("googleLogin");
 const signupForm = document.getElementById("signup-form");
 var btnEdit = document.getElementById("btnEdit");
-var btnCreate = document.getElementById("btnCreate");
+var btnCreateI = document.getElementById("btnCreateI");
 const googleRegister = document.getElementById("googleRegister");
 const admingreeting = document.getElementById("admin-greeting");
 const textgreeting = document.getElementById("text-greeting");
@@ -31,7 +32,7 @@ auth.onAuthStateChanged((user) => {
     if (loginForm) loginForm.classList.add("hidden");
     if (checkUser) checkUser.classList.remove("hidden");
 
-    // 2. ĐI KIỂM TRA QUYỀN ADMIN TỪ FIRESTORE
+    // kiểm tra quyền users
     db.collection("users")
       .doc(user.uid)
       .get()
@@ -39,7 +40,7 @@ auth.onAuthStateChanged((user) => {
         if (doc.exists && doc.data().role === "admin") {
           // Hiện các nút dành riêng cho Admin
           if (btnEdit) btnEdit.classList.remove("hidden");
-          if (btnCreate) btnCreate.classList.remove("hidden");
+          if (btnCreateI) btnCreateI.classList.remove("hidden");
           if (admingreeting) {
             admingreeting.classList.remove("hidden");
             textgreeting.innerText = `Xin chào Admin ${user.displayName || user.email}`;
@@ -47,7 +48,8 @@ auth.onAuthStateChanged((user) => {
         } else {
           // Ẩn các nút Admin nếu người này không phải admin
           if (btnEdit) btnEdit.classList.add("hidden");
-          if (btnCreate) btnCreate.classList.add("hidden");
+          if (btnCreateI) btnCreateI.classList.add("hidden");
+          if (admingreeting) admingreeting.classList.add("hidden");
         }
       });
   } else {
