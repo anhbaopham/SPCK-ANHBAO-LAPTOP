@@ -178,8 +178,22 @@
           id="search-bar"
           type="text"
           placeholder="Nhập tên laptop cần tìm..."
-          class="input input-bordered flex-1"
+          class="input input-bordered flex-1 inset-0"
         />
+        <select
+          id="brand-select"
+          class="select select-sm select-secondary w-40"
+        >
+          <option value="all" selected>Tất cả thương hiệu</option>
+          <option value="Apple">Apple (MacBook)</option>
+          <option value="Asus">Asus</option>
+          <option value="Lenovo">Lenovo</option>
+          <option value="Dell">Dell</option>
+          <option value="HP">HP</option>
+          <option value="Acer">Acer</option>
+          <option value="MSI">MSI</option>
+          <option value="LG">LG</option>
+        </select>
 
         <!-- Create -->
         <a id="btnCreateI" href="./create.html" class="hidden btn btn-primary">

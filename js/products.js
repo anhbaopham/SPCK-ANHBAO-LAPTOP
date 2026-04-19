@@ -3,10 +3,11 @@ var productList = document.getElementById("product-list");
 var btnEdit = document.getElementById("btnEdit");
 var isEditMode = false;
 let allProducts = [];
-const searchInput = document.getElementById("search-bar");
+
 // Hàm hiển thị sản phẩm ra màn hình
 function renderProducts(list) {
   if (!productList) return;
+  //
   productList.innerHTML = list
     .map(
       (p) => `
@@ -14,7 +15,8 @@ function renderProducts(list) {
       <figure class="p-4 ${!isEditMode ? "cursor-pointer" : ""}" 
         onclick="${!isEditMode ? `location.href='detail1.html?id=${p.id}'` : ""}">
         
-        ${p.stock === 0 ? '<div class="flex-[8] animate-pulse  bg-red-600 rounded-sm text-white text-xs font-bold p-0.5 absolute pl-50 pr-50  ">Hết hàng</div>' : ""}
+        ${p.stock === 0 ? '<div class=" animate-pulse  bg-black/70 rounded-sm text-white text-xs font-bold p-0.5 absolute pl-50 pr-50  ">Hết hàng</div>' : ""}
+       
         <img src="${p.thumbnail}" class="h-40 object-contain w-full" alt="${p.title}" />
       </figure>
       <div class="card-body">
@@ -36,19 +38,33 @@ function renderProducts(list) {
 async function initPage() {
   // search sản phẩm
   allProducts = await getProductsFromFirebase();
-
   renderProducts(allProducts);
+  const searchInput = document.getElementById("search-bar");
+  const brandSelect = document.getElementById("brand-select");
+
   if (searchInput) {
-    //e.targer => lấy giá trị đã nhập trong input | rồi tạo danh sách lọc thông qua keyword
+    //e.target => lấy giá trị đã nhập trong input | rồi tạo danh sách lọc thông qua keyword
     searchInput.addEventListener("input", (e) => {
       const keyword = e.target.value.toLowerCase();
+      brandSelect.value = "all"; // reset bộ lọc thương hiệu khi tìm kiếm
       const filtered = allProducts.filter(
         (p) =>
           p.title.toLowerCase().includes(keyword) ||
           p.description.toLowerCase().includes(keyword) ||
           p.price.toString().includes(keyword),
       );
+
       renderProducts(filtered);
+    });
+    brandSelect.addEventListener("change", (t) => {
+      const brand = t.target.value;
+      searchInput.value = ""; // reset ô tìm kiếm khi chọn lọc thương hiệu
+      const filteredBrand =
+        brand === "all"
+          ? allProducts
+          : allProducts.filter((p) => p.brand === brand);
+      //Điều kiện ? Giá trị nếu đúng : Giá trị nếu sai;
+      renderProducts(filteredBrand);
     });
   }
 }

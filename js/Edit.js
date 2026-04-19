@@ -21,10 +21,10 @@ async function loadDataToEdit() {
 
   // Đổ dữ liệu vào đúng ID trong file edit.html của bạn
   editTitle.value = product.title || "";
-  editPrice.value = product.price || 0;
+  editPrice.value = (product.price || 0).toString();
   editDesc.value = product.description || "";
   editImg.value = product.thumbnail || "";
-  editStock.value = product.stock || 0;
+  editStock.value = (product.stock || 0).toString();
   bgEdit.src = product.thumbnail || "";
 
   editStock.addEventListener("input", async (o) => {
