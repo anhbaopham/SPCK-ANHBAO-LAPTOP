@@ -15,7 +15,6 @@ async function getProductsFromFirebase() {
     return [];
   }
 }
-
 // Lấy 1 sản phẩm theo ID
 async function getProductByIdFromFirebase(docId) {
   try {

@@ -44,6 +44,7 @@ async function initPage() {
 
   if (searchInput) {
     //e.target => lấy giá trị đã nhập trong input | rồi tạo danh sách lọc thông qua keyword
+    // includes là bao gồm
     searchInput.addEventListener("input", (e) => {
       const keyword = e.target.value.toLowerCase();
       brandSelect.value = "all"; // reset bộ lọc thương hiệu khi tìm kiếm
@@ -53,7 +54,7 @@ async function initPage() {
           p.description.toLowerCase().includes(keyword) ||
           p.price.toString().includes(keyword),
       );
-
+      //sau đó render ra
       renderProducts(filtered);
     });
     brandSelect.addEventListener("change", (t) => {
