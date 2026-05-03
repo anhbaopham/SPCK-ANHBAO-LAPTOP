@@ -1,15 +1,15 @@
 // js/product-data.js
 const db = firebase.firestore();
 const collectionName = "products";
-
+// vì đang sử dụng trong chế độ Test mode nên sau 30 ngày dữ liệu sẽ bị chặn, không lấy đc
 // Lấy tất cả sản phẩm
 async function getProductsFromFirebase() {
   try {
-    const snapshot = await db
+    const dulieu = await db
       .collection(collectionName)
       .orderBy("createdAt", "desc")
       .get();
-    return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    return dulieu.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   } catch (error) {
     console.error("Lỗi lấy danh sách:", error);
     return [];
