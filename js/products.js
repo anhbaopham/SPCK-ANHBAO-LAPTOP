@@ -7,20 +7,28 @@ let allProducts = [];
 // Hàm hiển thị sản phẩm ra màn hình
 function renderProducts(list) {
   if (!productList) return;
-  //
+
   productList.innerHTML = list
-    .map(
-      (p) => `
-    <div class="card bg-base-100 shadow hover:shadow-lg product-card">
-      <figure class="p-4 ${!isEditMode ? "cursor-pointer" : ""}" 
+    .map((p) => {
+      // 1. Kiểm tra điều kiện sắp hết hàng (stock từ 1 đến 4)
+      const isLowStock = p.stock > 0 && p.stock < 5;
+
+      return `
+    <div class="card bg-base-100 shadow hover:shadow-lg product-card border border-base-200">
+      <figure class="relative p-4 ${!isEditMode ? "cursor-pointer" : ""}" 
         onclick="${!isEditMode ? `location.href='detail1.html?id=${p.id}'` : ""}">
         
-        ${p.stock === 0 ? '<div class=" animate-pulse  bg-black/70 rounded-sm text-white text-xs font-bold p-0.5 absolute pl-50 pr-50  ">Hết hàng</div>' : ""}
-       
+        ${p.stock === 0 ? '<div class="badge badge-error absolute top-2 right-2 font-bold uppercase text-[10px]">Hết hàng</div>' : ""}
+        
         <img src="${p.thumbnail}" class="h-40 object-contain w-full" alt="${p.title}" />
       </figure>
-      <div class="card-body">
-        <h2 class="card-title text-sm line-clamp-1">${p.title}</h2>
+
+      <div class="card-body p-4">
+        <h2 class="card-title text-sm line-clamp-1">
+          ${p.title} 
+          ${isLowStock ? '<div class="badge badge-warning text-[10px]">Sắp hết hàng</div>' : ""}
+        </h2> 
+        
         <p class="font-bold text-red-600">${Number(p.price).toLocaleString()} đ</p>
         
         <div class="grid grid-cols-2 gap-2 mt-2 ${isEditMode ? "" : "hidden"}">
@@ -29,8 +37,8 @@ function renderProducts(list) {
         </div>
       </div>
     </div>
-  `,
-    )
+  `;
+    })
     .join("");
 }
 
@@ -39,6 +47,20 @@ async function initPage() {
   // search sản phẩm
   allProducts = await getProductsFromFirebase();
   renderProducts(allProducts);
+  allProducts.forEach((e) => {
+    if (e.stock > 0 && e.stock < 5) {
+      const badge = document.getElementById("sold-badge");
+      if (badge) {
+        badge.classList.remove("hidden");
+      }
+    } else {
+      const badge = document.getElementById("sold-badge");
+      if (badge) {
+        badge.classList.add("hidden");
+      }
+    }
+  });
+
   const searchInput = document.getElementById("search-bar");
   const brandSelect = document.getElementById("brand-select");
 

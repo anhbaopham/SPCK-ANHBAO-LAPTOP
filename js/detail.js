@@ -1,4 +1,3 @@
-// js/detail.js
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 const productTitle = document.getElementById("product-title");
@@ -7,6 +6,7 @@ const productImage = document.getElementById("product-image");
 const productPrice = document.getElementById("product-price");
 const productStock = document.getElementById("product-stock");
 const btnBuy = document.getElementById("btnBuy");
+const auth = firebase.auth();
 async function renderDetail() {
   const product = await getProductByIdFromFirebase(id);
 
@@ -27,3 +27,24 @@ async function renderDetail() {
 }
 
 renderDetail();
+
+btnBuy.addEventListener("click", () => {
+  auth.onAuthStateChanged((user) => {
+    if (!user) {
+      Swal.fire({
+        title: "Vui lòng đăng nhập",
+        text: "Bạn cần đăng nhập để đặt hàng.",
+        icon: "warning",
+      }).then(() => (window.location.href = "signin.html"));
+    } else {
+      Swal.fire({
+        title: "Đặt hàng thành công!",
+        text: "Cảm ơn bạn đã mua hàng.",
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then(() => {
+        location.href = "index.html";
+      });
+    }
+  });
+});

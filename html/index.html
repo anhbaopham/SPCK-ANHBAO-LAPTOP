@@ -170,21 +170,29 @@
         </div>
       </div>
     </div>
-    <!-- Thanh tìm kiếm-->
-    <div class="flex justify-center mt-8 mb-6 px-4">
-      <div class="flex items-center gap-3 w-full max-w-2xl">
-        <!-- Input -->
-        <input
-          id="search-bar"
-          type="text"
-          placeholder="Nhập tên laptop cần tìm..."
-          class="input input-bordered flex-1 inset-0"
-        />
+    <!-- Thanh tìm kiếm & Chức năng -->
+    <!-- flex (phần tử nằm ngang), flex-col (phân tử xếp dọc) -->
+    <div class="flex flex-col items-center gap-6 mt-12 mb-10 px-4">
+      <div
+        class="join w-full max-w-3xl shadow-lg border border-gray-400 rounded-xl overflow-hidden bg-white"
+      >
+        <div class="relative flex-1 flex items-center">
+          <input
+            id="search-bar"
+            type="text"
+            placeholder="Bạn muốn tìm laptop gì hôm nay?..."
+            class="input join-item w-full pl-12 border-none focus:outline-none text-gray-700 font-medium placeholder:font-normal placeholder:text-gray-400"
+          />
+          <span class="absolute left-4 text-gray-600">
+            <i class="fa-duotone fa-solid fa-magnifying-glass"></i>
+          </span>
+        </div>
+
         <select
           id="brand-select"
-          class="select select-sm select-secondary w-40"
+          class="select join-item border-y-0 border-r-0 border-l border-gray-100 bg-base-100 text-gray-600 font-semibold text-sm tracking-wide px-6 hover:text-primary"
         >
-          <option value="all" selected>Tất cả thương hiệu</option>
+          <option value="all" selected>Tất cả hãng</option>
           <option value="Apple">Apple (MacBook)</option>
           <option value="Asus">Asus</option>
           <option value="Lenovo">Lenovo</option>
@@ -194,20 +202,22 @@
           <option value="MSI">MSI</option>
           <option value="LG">LG</option>
         </select>
+      </div>
 
-        <!-- Create -->
-        <a id="btnCreateI" href="./create.html" class="hidden btn btn-primary">
-          <i class="fa-solid fa-circle-plus"></i>
-        </a>
-
-        <!-- Edit -->
-        <button id="btnEdit" class="hidden btn btn-outline">Chỉnh sửa</button>
-        <!-- bag-shopping -->
-        <!-- <button
-          class="h-10 w-10 flex justify-center items-center rounded-full bg-gray-200 hover:bg-gray-300 transition-colors duration-200"
+      <div class="flex gap-4">
+        <a
+          id="btnCreateI"
+          href="./create.html"
+          class="hidden btn btn-primary btn-sm rounded-lg shadow-sm font-bold text-xs tracking-tighter"
         >
-          <i class="fa-duotone fa-solid fa-bag-shopping"></i>
-        </button> -->
+          <i class="fa-solid fa-plus mr-2"></i> Thêm máy mới
+        </a>
+        <button
+          id="btnEdit"
+          class="hidden btn btn-ghost btn-sm border border-gray-300 rounded-lg font-bold text-xs text-gray-500 hover:text-black"
+        >
+          <i class="fa-solid fa-pen-to-square mr-1"></i> Sửa
+        </button>
       </div>
     </div>
 
